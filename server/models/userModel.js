@@ -2,7 +2,13 @@ const db = require('../utils/db'); // Assuming a db utility for database connect
 
 class UserModel {
   static async findByUsername(username) {
-    const sql = 'SELECT * FROM Customer WHERE Name = ? UNION SELECT * FROM Staff WHERE Name = ? UNION SELECT * FROM Owner WHERE Username = ?';
+    const sql = `
+      SELECT *, 'customer' AS role FROM Customer WHERE Name = ?
+      UNION
+      SELECT *, 'staff' AS role FROM Staff WHERE Name = ?
+      UNION
+      SELECT *, 'owner' AS role FROM Owner WHERE Username = ?
+    `;
     const [rows] = await db.execute(sql, [username, username, username]);
     return rows[0];
   }

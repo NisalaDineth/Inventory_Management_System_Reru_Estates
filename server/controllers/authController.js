@@ -27,8 +27,9 @@ class AuthController {
       if (!validPassword) {
         return res.status(401).json({ message: 'Invalid username or password' });
       }
-      const token = jwt.sign({ id: user.CustomerID || user.StaffID || user.OwnerID, role: user.role || user.Role || 'customer' }, SECRET_KEY, { expiresIn: '1h' });
-      res.json({ message: 'Login successful', token });
+      const role = user.role || user.Role || 'customer';
+      const token = jwt.sign({ id: user.CustomerID || user.StaffID || user.OwnerID, role }, SECRET_KEY, { expiresIn: '1h' });
+      res.json({ message: 'Login successful', token, role });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

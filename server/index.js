@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2');
 const authRoutes = require('./routes/authRoutes');
+const ownerRoutes = require('./routes/ownerRoutes');
 
 const app = express();
 const PORT = 5000;
@@ -129,6 +130,7 @@ db.connect(err => {
 
 // Use auth routes
 app.use('/api/auth', authRoutes);
+app.use('/api/owner', ownerRoutes);
 
 // Role-based middleware
 function checkRole(role) {
