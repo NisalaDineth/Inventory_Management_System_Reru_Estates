@@ -5,7 +5,7 @@ USE reru_estates_system;
 -- Customer table
 CREATE TABLE IF NOT EXISTS Customer (
   CustomerID INT AUTO_INCREMENT PRIMARY KEY,
-  Name VARCHAR(100) NOT NULL,
+  Name VARCHAR(20) NOT NULL,
   Password VARCHAR(255) NOT NULL,
   Email VARCHAR(100) NOT NULL UNIQUE,
   PhoneNumber VARCHAR(20),
@@ -100,6 +100,17 @@ CREATE TABLE IF NOT EXISTS FinancialReport (
   TotalRevenue DECIMAL(10,2),
   TotalExpenses DECIMAL(10,2),
   NetProfit DECIMAL(10,2)
+);
+
+-- Insert a sample customer
+INSERT INTO Customer (Name, Password, Email, PhoneNumber, FirstName, LastName)
+VALUES (
+  'nisala123',                             -- Username
+  '$2b$10$2iF5x6x3v6PjN.x5N/j2XOBM6b8WqxW2S/E5QcoNsXREt4c/Muzze',  -- Hashed password: "test123"
+  'nisal@example.com',
+  '0771234567',
+  'Nisal',
+  'Perera'
 );
 
 -- Relationships from ER diagram:
